@@ -55,22 +55,20 @@ public:
         return line;
     }
 
-    void draw_grid(uint scale, uint mode) {
-        double width = plot_->x.drawMax() - plot_->x.drawMin();
-        double height = plot_->y.drawMax() - plot_->y.drawMin();
-
-        for (double i = 0; i < width; i += scale) 
+    void draw_grid(double width, double height, uint scale, uint mode) {
+        draw_line(0, 0, 0, height, mode);
+        for (double i = 0; i <= width; i += scale) 
             draw_line(i, 0, i, height, mode);
-        for (double i = 0; i < height; i += scale) 
+        for (double i = 0; i <= height; i += scale) 
             draw_line(0, i, width, i, mode);
     }
 
-    signalsmith::plot::Line2D& draw_marker(signalsmith::plot::Line2D& line, const double& x, const double& y) {
+    signalsmith::plot::Line2D& draw_point(signalsmith::plot::Line2D& line, const double& x, const double& y) {
         line.marker(x, y);
         return line;
     }
 
-    signalsmith::plot::Line2D& draw_marker(signalsmith::plot::Line2D& line, const std::vector<double>& xs, const std::vector<double>& ys) {
+    signalsmith::plot::Line2D& draw_point(signalsmith::plot::Line2D& line, const std::vector<double>& xs, const std::vector<double>& ys) {
         for(size_t i = 0; i < xs.size(); ++i) {
             line.marker(xs[i], ys[i]);
         }
